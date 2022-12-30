@@ -41,7 +41,7 @@ void history_file();
 int main(){
     sleep(1);
     char ch[2] = "\n";
-    getcwd(current_directory, sizeof(current_directory));
+
     signal(SIGINT, sigintHandler);
     system("clear");
     while(true){
@@ -54,8 +54,6 @@ int main(){
         {
             continue;
         }
-        len = strlen(input_buffer);
-        //input_buffer[len-1] = '\0';
         if(strcmp(input_buffer, "exit") == 0)
         {
             flag = 1;
@@ -73,7 +71,6 @@ int main(){
     return 0;
 }
 //echo hello >> h.txt
-
 void history_file(){
     char his[1000];
     strcpy(his, "echo ");
@@ -83,7 +80,7 @@ void history_file(){
 }
 void takeInput(char* str){
     char* buf;
-    buf = readline("\n----->");
+    buf = readline("\n>");
     if (strlen(buf) != 0) {
 		add_history(buf);
 		strcpy(str, buf);
@@ -93,6 +90,8 @@ void takeInput(char* str){
 void sigintHandler(int sig_num){
     signal(SIGINT, sigintHandler);
     fflush(stdout);
+    //prompt();
+    //takeInput(input_buffer);
 }
 
 void whit_pipe_execute(){
